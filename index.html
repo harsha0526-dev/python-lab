@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Practicals</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            gap: 0;
+            max-width: 1400px;
+            margin: 20px auto;
+            width: 95%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .sidebar h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .program-list {
+            list-style: none;
+        }
+
+        .program-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .program-item:hover {
+            background: #e8f0ff;
+            border-left-color: #764ba2;
+            transform: translateX(5px);
+        }
+
+        .program-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-left-color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .program-display {
+            display: none;
+        }
+
+        .program-display.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .program-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            white-space: pre;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .code-block code {
+            display: block;
+            white-space: pre;
+        }
+
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; font-style: italic; }
+        .function { color: #dcdcaa; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+        }
+
+        .empty-state p {
+            font-size: 1.2em;
+        }
+
+        .search-box {
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 5px rgba(118, 75, 162, 0.3);
+        }
+
+        .program-count {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 300px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        .no-results {
+            color: #999;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Python Practicals</h1>
+        <p>Your Complete Practice Programs Collection</p>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search programs...">
+            </div>
+            <h2>Programs</h2>
+            <ul class="program-list" id="programList"></ul>
+            <div class="program-count" id="programCount"></div>
+        </div>
+
+        <div class="main-content" id="mainContent">
+            <div class="empty-state">
+                <p>📖 Select a program from the left to view its code</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Program data
+        const programs = [
+            {
+                name: "Positive Negative or Zero",
+                file: "1. positive negative or zero.txt",
+                filename: "1. positive negative or zero.txt"
+            },
+            {
+                name: "Triangle Number Pattern",
+                file: "2. triangle number pattern.txt",
+                filename: "2. triangle number pattern.txt"
+            },
+            {
+                name: "Recursive Function and Lambda",
+                file: "3. recursive function and lambda .txt",
+                filename: "3. recursive function and lambda .txt"
+            },
+            {
+                name: "Mini Banking Statement",
+                file: "4. mini banking statement.txt",
+                filename: "4. mini banking statement.txt"
+            },
+            {
+                name: "Employee Bonus Calculator",
+                file: "5. employee bonus calculator.txt",
+                filename: "5. employee bonus calculator.txt"
+            },
+            {
+                name: "Library Management System",
+                file: "6. library management system.txt",
+                filename: "6. library management system.txt"
+            },
+            {
+                name: "Student Record Manager",
+                file: "7. student record manager.txt",
+                filename: "7. student record manager.txt"
+            },
+            {
+                name: "Student Records",
+                file: "8. student records.txt",
+                filename: "8. student records.txt"
+            },
+            {
+                name: "Expense Visualization Using CSV",
+                file: "9. expense visualization using csv file.txt",
+                filename: "9. expense visualization using csv file.txt"
+            },
+            {
+                name: "Text File Processor",
+                file: "10. text file processor.txt",
+                filename: "10. text file processor.txt"
+            },
+            {
+                name: "Graphical Calculator",
+                file: "11. graphical calculator.txt",
+                filename: "11. graphical calculator.txt"
+            },
+            {
+                name: "Django Web Application",
+                file: "12. django web application.txt",
+                filename: "12. django web application.txt"
+            }
+        ];
+
+        let allPrograms = [...programs];
+        let programContents = {};
+        let currentProgram = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProgramList(allPrograms);
+            setupSearch();
+            updateProgramCount();
+        });
+
+        // Render program list
+        function renderProgramList(list) {
+            const programList = document.getElementById('programList');
+            programList.innerHTML = '';
+
+            if (list.length === 0) {
+                programList.innerHTML = '<div class="no-results">No programs found</div>';
+                return;
+            }
+
+            list.forEach((program, index) => {
+                const li = document.createElement('li');
+                li.className = 'program-item';
+                li.textContent = program.name;
+                li.onclick = () => selectProgram(index, list);
+                programList.appendChild(li);
+            });
+        }
+
+        // Select program and load content
+        function selectProgram(index, list) {
+            currentProgram = list[index];
+            updateActiveItem(index);
+            loadProgramContent(currentProgram);
+        }
+
+        // Update active item styling
+        function updateActiveItem(index) {
+            document.querySelectorAll('.program-item').forEach((item, i) => {
+                item.classList.remove('active');
+                if (i === index) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Load program content
+        function loadProgramContent(program) {
+            const mainContent = document.getElementById('mainContent');
+
+            if (programContents[program.file]) {
+                displayProgram(program, programContents[program.file]);
+                return;
+            }
+
+            // Simulate fetching file content
+            fetch(program.file)
+                .then(response => response.text())
+                .then(content => {
+                    programContents[program.file] = content;
+                    displayProgram(program, content);
+                })
+                .catch(error => {
+                    // If fetch fails, show a message
+                    mainContent.innerHTML = `
+                        <h2 class="program-title">${program.name}</h2>
+                        <div class="code-block">
+                            <code>
+Note: File content could not be loaded directly due to browser restrictions.
+File: ${program.filename}
+
+The program code would be displayed here.
+Make sure the file is in the same directory as this HTML file.
+                            </code>
+                        </div>
+                        <p style="color: #666; margin-top: 20px;">
+                            <strong>Tip:</strong> To view the actual code, you can:
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>Open the .txt file directly</li>
+                                <li>Use a local server to serve these files</li>
+                                <li>Copy the code directly into a Python IDE</li>
+                            </ul>
+                        </p>
+                    `;
+                });
+        }
+
+        // Display program
+        function displayProgram(program, content) {
+            const mainContent = document.getElementById('mainContent');
+            const escapedCode = escapeHtml(content);
+
+            mainContent.innerHTML = `
+                <h2 class="program-title">📝 ${program.name}</h2>
+                <div class="code-block"><code>${escapedCode}</code></div>
+                <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+                    <strong>File:</strong> ${program.filename}
+                </div>
+            `;
+        }
+
+        // Escape HTML characters
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                const filtered = allPrograms.filter(program =>
+                    program.name.toLowerCase().includes(query)
+                );
+                renderProgramList(filtered);
+                updateProgramCount(filtered.length);
+            });
+        }
+
+        // Update program count
+        function updateProgramCount(count = allPrograms.length) {
+            document.getElementById('programCount').textContent = `${count} program${count !== 1 ? 's' : ''}`;
+        }
+    </script>
+</body>
+</html>

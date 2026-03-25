@@ -1,0 +1,28 @@
+def process_file(input_file, output_file):
+    line_count = 0
+    word_count = 0
+    long_words = []
+
+    # Read the input file
+    with open(input_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            line_count += 1
+            words = line.split()
+            word_count += len(words)
+            # Collect words longer than 5 characters
+            long_words.extend([word for word in words if len(word) > 5])
+
+    # Print counts
+    print(f"Total lines: {line_count}")
+    print(f"Total words: {word_count}")
+
+    # Save long words to output file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        for word in long_words:
+            f.write(word + '\n')
+
+
+# Example usage
+input_file = "input.txt"   # Replace with your file name
+output_file = "long_words.txt"
+process_file(input_file, output_file)

@@ -1,0 +1,78 @@
+bank_module.py
+# bank_module.py
+
+class InsufficientBalanceError(Exception):
+    """Custom exception for insufficient balance."""
+    pass
+
+
+def deposit(balance, amount):
+    """
+    Deposit money into the account.
+    :param balance: Current balance
+    :param amount: Amount to deposit
+    :return: Updated balance
+    """
+    if amount <= 0:
+        raise ValueError("Deposit amount must be positive.")
+    balance += amount
+    return balance
+
+
+def withdraw(balance, amount):
+    """
+    Withdraw money from the account.
+    :param balance: Current balance
+    :param amount: Amount to withdraw
+    :return: Updated balance
+    :raises InsufficientBalanceError: if balance is insufficient
+    """
+    if amount <= 0:
+        raise ValueError("Withdrawal amount must be positive.")
+    if balance < amount:
+        raise InsufficientBalanceError("Insufficient balance for withdrawal.")
+    balance -= amount
+    return balance
+
+
+def check_balance(balance):
+    """
+    Return the current balance.
+    :param balance: Current balance
+    :return: Balance
+    """
+    return balance
+________________________________________
+ main.py
+# main.py
+
+import bank_module
+
+def main():
+    balance = 5000  # initial balance
+
+    print("Welcome to Mini Banking System")
+    print("Initial Balance:", bank_module.check_balance(balance))
+
+    # Deposit
+    try:
+        balance = bank_module.deposit(balance, 2000)
+        print("After deposit, Balance:", bank_module.check_balance(balance))
+    except ValueError as e:
+        print("Error:", e)
+
+    # Withdrawal
+    try:
+        balance = bank_module.withdraw(balance, 8000)  # trying to withdraw more than balance
+        print("After withdrawal, Balance:", bank_module.check_balance(balance))
+    except bank_module.InsufficientBalanceError as e:
+        print("Error:", e)
+    except ValueError as e:
+        print("Error:", e)
+
+    # Final Balance Inquiry
+    print("Final Balance:", bank_module.check_balance(balance))
+
+
+if __name__ == "__main__":
+    main()

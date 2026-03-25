@@ -1,0 +1,66 @@
+import json
+
+FILENAME = "students.json"
+
+def load_data():
+    """Load student data from file."""
+    try:
+        with open(FILENAME, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []  # return empty list if file doesn't exist
+
+
+def save_data(data):
+    """Save student data to file."""
+    with open(FILENAME, "w") as f:
+        json.dump(data, f, indent=4)
+
+
+def add_student(roll_no, name, marks):
+    """Add a new student record."""
+    data = load_data()
+    student = {"roll_no": roll_no, "name": name, "marks": marks}
+    data.append(student)
+    save_data(data)
+    print(f"Student {name} added successfully.")
+
+
+def search_student(roll_no):
+    """Search for a student by roll number."""
+    data = load_data()
+    for student in data:
+        if student["roll_no"] == roll_no:
+            print("Student Found:", student)
+            return student
+    print("Student not found.")
+    return None
+
+
+def update_marks(roll_no, new_marks):
+    """Update marks for a student by roll number."""
+    data = load_data()
+    for student in data:
+        if student["roll_no"] == roll_no:
+            student["marks"] = new_marks
+            save_data(data)
+            print(f"Marks updated for {student['name']}.")
+            return
+    print("Student not found.")
+
+
+# Example usage
+if __name__ == "__main__":
+    # Add students
+    add_student(101, "Alice", 85)
+    add_student(102, "Bob", 90)
+    add_student(103, "Charlie", 78)
+
+    # Search student
+    search_student(102)
+
+    # Update marks
+    update_marks(103, 88)
+
+    # Verify update
+    search_student(103)

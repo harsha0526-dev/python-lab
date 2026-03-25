@@ -1,0 +1,35 @@
+import pandas as pd
+
+# Create a sample student records DataFrame
+data = {
+    "StudentID": [101, 102, 103, 104, 105, 106],
+    "Name": ["Amit", "John", "Latha", "Asha", "John", "Ravi"],
+    "Gender": ["M", "M", "F", "F", "M", "M"],
+    "Class": ["XII", "XII", "XI", "XI", "XII", "XI"],
+    "Marks": [95, 70, 88, 60, 90, 75]
+}
+
+df = pd.DataFrame(data)
+
+print("=== Student Records ===")
+print(df)
+
+# 1. Summary statistics for numeric columns
+print("\n=== Summary statistics (describe) for numeric columns ===")
+print(df.describe())      # Only numeric columns (StudentID, Marks)
+
+# 2. Summary including object columns (set include='all')
+print("\n=== Summary statistics for all columns ===")
+print(df.describe(include='all'))
+
+# 3. Value counts for a single column (e.g., Class)
+print("\n=== Value counts for Class ===")
+print(df["Class"].value_counts())
+
+# 4. Value counts for Gender
+print("\n=== Value counts for Gender ===")
+print(df["Gender"].value_counts())
+
+# 5. Example: most frequent name using value_counts()
+print("\n=== Most frequent Name ===")
+print(df["Name"].value_counts().head(1))

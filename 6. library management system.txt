@@ -1,59 +1,84 @@
-class Employee:
-    def __init__(self, emp_id, name, base_salary, performance_rating):
-        """
-        Initialize employee attributes.
-        :param emp_id: Unique identifier for the employee
-        :param name: Employee's name
-        :param base_salary: Employee's base salary
-        :param performance_rating: Performance rating (scale 1–5)
-        """
-        self.emp_id = emp_id
-        self.name = name
-        self.base_salary = base_salary
-        self.performance_rating = performance_rating
-
-    def calculate_bonus(self):
-        """
-        Calculate performance-based bonus using conditional logic.
-        Bonus percentage depends on performance rating:
-        - 5 → 20% of base salary
-        - 4 → 15% of base salary
-        - 3 → 10% of base salary
-        - 2 → 5% of base salary
-        - 1 → No bonus
-        """
-        if self.performance_rating == 5:
-            bonus_percentage = 0.20
-        elif self.performance_rating == 4:
-            bonus_percentage = 0.15
-        elif self.performance_rating == 3:
-            bonus_percentage = 0.10
-        elif self.performance_rating == 2:
-            bonus_percentage = 0.05
-        else:
-            bonus_percentage = 0.0
-
-        return self.base_salary * bonus_percentage
-
-    def display_employee_info(self):
-        """
-        Display employee details along with calculated bonus.
-        """
-        bonus = self.calculate_bonus()
-        print(f"Employee ID: {self.emp_id}")
-        print(f"Name: {self.name}")
-        print(f"Base Salary: {self.base_salary}")
-        print(f"Performance Rating: {self.performance_rating}")
-        print(f"Bonus: {bonus}")
-
-
-    emp1 = Employee(101, "Alice", 50000, 5)
-    emp2 = Employee(102, "Bob", 40000, 3)
-    emp3 = Employee(103, "Charlie", 35000, 1)
-
-    # Display employee info with bonuses
-    emp1.display_employee_info()
-    print("------")
-    emp2.display_employee_info()
-    print("------")
-    emp3.display_employee_info()
+class Book: 
+    def __init__(self, book_id, title, author): 
+        self.book_id = book_id 
+        self.title = title 
+        self.author = author 
+        self.is_borrowed = False 
+ 
+    def __str__(self): 
+        status = "Borrowed" if self.is_borrowed else "Available" 
+        return f"ID: {self.book_id}, Title: {self.title}, Author: {self.author}, Status: {status}" 
+ 
+ 
+class Library: 
+    def __init__(self): 
+        self.books = [] 
+ 
+    def add_book(self, book): 
+        self.books.append(book) 
+        print(f"Book '{book.title}' added successfully.") 
+ 
+    def search_book(self, keyword): 
+        results = [book for book in self.books if keyword.lower() in book.title.lower() or keyword.lower() in 
+book.author.lower()] 
+        if results: 
+            print("Search Results:") 
+            for book in results: 
+                print(book) 
+        else: 
+            print("No books found with that keyword.") 
+ 
+    def borrow_book(self, book_id): 
+        for book in self.books: 
+            if book.book_id == book_id: 
+                if not book.is_borrowed: 
+                    book.is_borrowed = True 
+                    print(f"You have borrowed '{book.title}'.") 
+                else: 
+                    print(f"Sorry, '{book.title}' is already borrowed.") 
+                return 
+        print("Book ID not found.") 
+ 
+    def return_book(self, book_id): 
+        for book in self.books: 
+            if book.book_id == book_id: 
+                if book.is_borrowed: 
+                    book.is_borrowed = False 
+                    print(f"You have returned '{book.title}'.") 
+                else: 
+                    print(f"'{book.title}' was not borrowed.") 
+                return 
+        print("Book ID not found.") 
+25  
+ 
+    def display_books(self): 
+        if not self.books: 
+            print("Library is empty.") 
+        else: 
+            print("Library Collection:") 
+            for book in self.books: 
+                print(book) 
+ 
+if __name__ == "__main__": 
+    library = Library() 
+    library.add_book(Book(1, "The Great Gatsby", "F. Scott Fitzgerald")) 
+    library.add_book(Book(2, "1984", "George Orwell")) 
+    library.add_book(Book(3, "To Kill a Mockingbird", "Harper Lee")) 
+ 
+    print("\n--- Display Books ---") 
+    library.display_books() 
+ 
+    print("\n--- Search Books ---") 
+    library.search_book("George") 
+ 
+    print("\n--- Borrow Book ---") 
+    library.borrow_book(2) 
+ 
+    print("\n--- Display Books After Borrowing ---") 
+    library.display_books() 
+ 
+    print("\n--- Return Book ---") 
+    library.return_book(2) 
+ 
+    print("\n--- Display Books After Returning ---") 
+    library.display_books(

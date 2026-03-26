@@ -1,3 +1,15 @@
+7. JSON Student Management (Program 2)
+Start the program and import json module for processing data.
+Define function to load existing student records from file.
+Define function to save updated student data into file.
+Create function to add new student record into list.
+Append new student details into existing records list.
+Define function to search student using roll number.
+Display student details if matching record is found.
+Define function to update marks of a particular student.
+Save updated data after modifying student marks successfully.
+End the program after executing all required functions.
+
 import json
 
 FILENAME = "students.json"

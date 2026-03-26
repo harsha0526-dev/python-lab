@@ -1,3 +1,15 @@
+10. File Processing
+Start the program and define function for processing file.
+Initialize variables to count lines, words, and long words.
+Open input file in read mode with proper encoding.
+Read file line by line using loop structure.
+Increment line counter for each line read from file.
+Split each line into words and count total words.
+Check each word length and collect words longer than five.
+Store long words in a separate list for output purpose.
+Write collected long words into output file line by line.
+End the program after completing file processing successfully.
+
 def process_file(input_file, output_file):
     line_count = 0
     word_count = 0

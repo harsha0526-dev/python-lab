@@ -1,3 +1,15 @@
+1. Positive / Negative / Zero
+Start the program and prepare to accept user input value.
+Prompt the user to enter a numeric value.
+Store the entered value into a variable named num.
+Check whether the entered number is greater than zero.
+If the number is greater than zero, display positive message.
+Otherwise check whether the number is less than zero.
+If the number is less than zero, display negative message.
+If both conditions fail, the number must be zero.
+Display the message indicating the number is zero.
+End the program after displaying the appropriate result.
+
 num=int(input("enter the number : "))
 
 if num>0:

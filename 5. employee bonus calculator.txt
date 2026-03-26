@@ -1,3 +1,15 @@
+5. Employee Bonus System
+Start the program and define a class named Employee.
+Initialize employee attributes like id, name, salary, and rating.
+Define method to calculate bonus based on performance rating.
+Check performance rating value using conditional statements.
+Assign bonus percentage according to rating from one to five.
+Multiply base salary with percentage to compute bonus amount.
+Define method to display complete employee information clearly.
+Create multiple employee objects with different input values.
+Call display method for each employee to show details.
+End the program after displaying all employee information.
+
 class Employee:
     def __init__(self, emp_id, name, base_salary, performance_rating):
         """

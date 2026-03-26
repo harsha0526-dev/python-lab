@@ -1,3 +1,15 @@
+12. Django Login System
+Start the program and define view function for handling requests.
+Initialize a variable to store login status message.
+Check whether the incoming request method is POST type.
+Retrieve username and password values from request object.
+Compare entered credentials with predefined valid credentials.
+Set success message if username and password match correctly.
+Otherwise set error message indicating invalid login attempt.
+Render HTML template and pass message as context variable.
+Configure URL patterns to connect view with browser request.
+End the program after displaying login result on webpage.
+
 from django.shortcuts import render
 def login_view(request):
     message = ""

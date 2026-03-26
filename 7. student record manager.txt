@@ -61,7 +61,6 @@ book.author.lower()]
                     print(f"'{book.title}' was not borrowed.") 
                 return 
         print("Book ID not found.") 
-25  
  
     def display_books(self): 
         if not self.books: 

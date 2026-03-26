@@ -1,3 +1,15 @@
+2. Pattern with pass, continue, break
+Start the program and initialize number of rows.
+Assign the value five to the variable named rows.
+Begin outer loop to iterate through each row.
+Begin inner loop to iterate values within each row.
+Check if current values satisfy condition for pass statement.
+If condition matches, execute pass and continue normal flow.
+Check if condition matches for continue statement execution.
+If condition matches, skip current iteration using continue statement.
+Print current value of j for pattern display purpose.
+Move to next line after each row and end program.
+
 rows=5 
 for i in range(1,rows+1): 
     for j in range(1,i+1): 

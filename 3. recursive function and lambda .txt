@@ -1,3 +1,15 @@
+3. Factorial (Recursion + Lambda)
+Start the program and import reduce function from functools module.
+Define a recursive function to calculate factorial of number.
+Inside function, check whether number is zero or one.
+If condition is true, return one as factorial result.
+Otherwise recursively call function with decremented number value.
+Define lambda function using reduce to compute factorial iteratively.
+Prompt user to input a number for factorial calculation.
+Convert the input value into integer data type.
+Display factorial using both recursion and lambda approaches.
+End the program after displaying both computed results.
+
 from functools import reduce 
  
  

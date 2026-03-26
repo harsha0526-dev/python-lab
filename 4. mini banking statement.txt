@@ -1,3 +1,15 @@
+4. Banking System (Module)
+Start the program and define a custom exception class.
+Create deposit function to handle adding money into account.
+Validate that deposit amount entered is greater than zero.
+Update the balance after successful deposit operation performed.
+Create withdraw function to handle money withdrawal from account.
+Validate withdrawal amount to ensure it is greater than zero.
+Check whether sufficient balance exists before withdrawing money.
+Raise exception if balance is insufficient for withdrawal operation.
+Display updated balance after performing deposit and withdrawal operations.
+End the program after showing final balance to user.
+
 bank_module.py
 # bank_module.py
 

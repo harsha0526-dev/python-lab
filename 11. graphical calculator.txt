@@ -1,3 +1,15 @@
+11. Tkinter Calculator
+Start the program and import tkinter and messagebox modules.
+Create main application window with fixed size and title.
+Add labels and entry fields to accept user input values.
+Define calculate function to perform arithmetic operations.
+Retrieve input values and convert them into float type.
+Perform operation based on button pressed by user.
+Handle division by zero using exception handling mechanism.
+Display calculated result using label widget in window.
+Handle invalid input using error message box display.
+Run main event loop to display graphical interface continuously.
+
 import tkinter as tk
 from tkinter import messagebox
 

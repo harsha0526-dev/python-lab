@@ -1,3 +1,15 @@
+6. JSON Student Management (Program 1)
+Start the program and import json module for file handling.
+Define filename where student records will be stored permanently.
+Create function to load data from JSON file.
+Handle file not found exception by returning empty list.
+Create function to save updated data into JSON file.
+Add new student record into existing data list structure.
+Save updated student list back into the JSON file.
+Search student record using roll number from stored data.
+Update student marks if matching record is found successfully.
+End the program after performing all required operations.
+
 import json 
  
 FILENAME = "students.json" 

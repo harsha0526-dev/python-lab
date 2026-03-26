@@ -1,3 +1,15 @@
+9. Matplotlib Visualization
+Start the program and import pandas and matplotlib libraries.
+Load dataset from CSV file into DataFrame structure.
+Extract required columns such as Month and Expense values.
+Create a figure for plotting line chart visualization.
+Plot line chart using Month and Expense data values.
+Add labels, title, legend, and grid to improve chart clarity.
+Display the generated line chart using show function.
+Create another figure for plotting bar chart visualization.
+Plot bar chart using Month and Expense data values.
+Display the bar chart and end the program execution.
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
